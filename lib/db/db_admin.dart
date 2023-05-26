@@ -11,15 +11,15 @@ class DBAdmin {
 
   DBAdmin._();
 
-  checkDatabase() async {
+  Future<Database?> checkDatabase() async {
     if (myDatabase != null) {
       return myDatabase;
     }
-    myDatabase = initDatabase(); //Crear base de datos
+    myDatabase = await initDatabase(); //Crear base de datos
     return myDatabase;
   }
 
-  initDatabase() async {
+  Future<Database> initDatabase() async {
     Directory directory = await getApplicationDocumentsDirectory();
     String path = join(directory.path, "TaskBD.db");
     return await openDatabase(
@@ -32,5 +32,22 @@ class DBAdmin {
             "CREATE TABLE TASK(ID INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, status TEXT )");
       },
     );
+  }
+
+  insertRawTask() async {
+    Database? db = await checkDatabase();
+    int res = await db!.rawInsert(
+        "INSERT INTO TASK(title, description, status) VALUES ('Ir de compras','Tenemos que ir a Tottus','false')");
+    print(res);
+  }
+
+  insertTask() async {
+    Database? db = await checkDatabase();
+    int res = await db!.insert("TASK", {
+      "title": "Comprar el nuevo disco",
+      "description": "Nuevo disco de Epica",
+      "status": "false",
+    });
+    print(res);
   }
 }
