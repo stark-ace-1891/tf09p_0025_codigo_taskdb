@@ -31,6 +31,24 @@ class HomePage extends StatelessWidget {
                 "Insertar Tarea",
               ),
             ),
+            ElevatedButton(
+              onPressed: () {
+                DBAdmin.db.updateTask();
+                // DBAdmin.db.updateRawTask();
+              },
+              child: Text(
+                "Actualizar Tarea",
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                DBAdmin.db.deleteTask();
+                // DBAdmin.db.deleteRawTask();
+              },
+              child: Text(
+                "Eliminar Tarea",
+              ),
+            ),
           ],
         ),
       ),
