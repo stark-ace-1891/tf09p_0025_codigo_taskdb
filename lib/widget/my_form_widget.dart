@@ -15,12 +15,30 @@ class _MyFormWidgetState extends State<MyFormWidget> {
   final TextEditingController _descriptionController = TextEditingController();
 
   addTask() {
-    TaskModel taskModel = TaskModel(
-      title: _titleController.text,
-      description: _descriptionController.text,
-      status: isFinished.toString(),
+    // TaskModel taskModel = TaskModel(
+    //   title: _titleController.text,
+    //   description: _descriptionController.text,
+    //   status: isFinished.toString(),
+    // );
+    // DBAdmin.db.insertTask(taskModel).then((value) {
+    //   if (value > 0) {
+    //     ScaffoldMessenger.of(context)
+    //         .showSnackBar(SnackBar(content: Text("Hola")));
+    //   }
+    // });
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: Colors.indigo,
+        content: Column(
+          children: [
+            Icon(Icons.check),
+            Text(
+              "Tarea registrada con exito",
+            )
+          ],
+        ),
+      ),
     );
-    DBAdmin.db.insertRawTask(taskModel);
   }
 
   @override
