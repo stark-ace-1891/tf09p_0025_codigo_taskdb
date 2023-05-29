@@ -50,15 +50,18 @@ class _HomePageState extends State<HomePage> {
             return ListView.builder(
               itemCount: myTasks.length,
               itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  title: Text(
-                    myTasks[index].title,
-                  ),
-                  subtitle: Text(
-                    myTasks[index].description,
-                  ),
-                  trailing: Text(
-                    myTasks[index].id.toString(),
+                return Dismissible(
+                  key: UniqueKey(),
+                  child: ListTile(
+                    title: Text(
+                      myTasks[index].title,
+                    ),
+                    subtitle: Text(
+                      myTasks[index].description,
+                    ),
+                    trailing: Text(
+                      myTasks[index].id.toString(),
+                    ),
                   ),
                 );
               },
