@@ -25,6 +25,30 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  deleteTask(taskId) {
+    DBAdmin.db.deleteTask(taskId).then((value) {
+      if (value > 0) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.indigo,
+            content: Row(
+              children: [
+                Icon(
+                  Icons.check_circle,
+                  color: Colors.white,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Text("Tarea eliminada"),
+              ],
+            ),
+          ),
+        );
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     DBAdmin.db.getTasks();
@@ -53,12 +77,19 @@ class _HomePageState extends State<HomePage> {
                 return Dismissible(
                   key: UniqueKey(), //Key(index.toString()),
                   confirmDismiss: (DismissDirection direction) async {
+                    //antes de ir al ondismissed
                     print(direction);
                     return true;
                   },
+                  //is el direction es startToEnd xaparece el background y si es endToStart aparece el secondaryBackground
                   direction: DismissDirection.startToEnd,
-                  background: Text("Hola"),
-                  secondaryBackground: Text("Hola"),
+                  background: Container(
+                    color: Colors.redAccent,
+                  ),
+                  onDismissed: (DismissDirection direction) {
+                    deleteTask(myTasks[index].id!);
+                  },
+                  // secondaryBackground: Text("Hola"),
                   child: ListTile(
                     title: Text(
                       myTasks[index].title,
@@ -66,8 +97,11 @@ class _HomePageState extends State<HomePage> {
                     subtitle: Text(
                       myTasks[index].description,
                     ),
-                    trailing: Text(
-                      myTasks[index].id.toString(),
+                    trailing: IconButton(
+                      onPressed: () {
+                        showDialogForm();
+                      },
+                      icon: Icon(Icons.edit),
                     ),
                   ),
                 );

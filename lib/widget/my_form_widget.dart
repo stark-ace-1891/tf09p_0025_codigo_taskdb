@@ -3,7 +3,9 @@ import 'package:tf09p_0025_codigo_taskdb/db/db_admin.dart';
 import 'package:tf09p_0025_codigo_taskdb/models/task_model.dart';
 
 class MyFormWidget extends StatefulWidget {
-  const MyFormWidget({super.key});
+  // TaskModel? modelo;
+
+  // MyFormWidget({ this.modelo });
 
   @override
   State<MyFormWidget> createState() => _MyFormWidgetState();
@@ -66,6 +68,7 @@ class _MyFormWidgetState extends State<MyFormWidget> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
+              // "${widget.modelo == null ? "Agregar" : "Modificar"} tarea",
               "Agregar tarea",
             ),
             SizedBox(
