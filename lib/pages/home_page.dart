@@ -51,7 +51,14 @@ class _HomePageState extends State<HomePage> {
               itemCount: myTasks.length,
               itemBuilder: (BuildContext context, int index) {
                 return Dismissible(
-                  key: UniqueKey(),
+                  key: UniqueKey(), //Key(index.toString()),
+                  confirmDismiss: (DismissDirection direction) async {
+                    print(direction);
+                    return true;
+                  },
+                  direction: DismissDirection.startToEnd,
+                  background: Text("Hola"),
+                  secondaryBackground: Text("Hola"),
                   child: ListTile(
                     title: Text(
                       myTasks[index].title,
