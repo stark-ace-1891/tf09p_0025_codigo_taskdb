@@ -79,16 +79,26 @@ class DBAdmin {
     print(res);
   }
 
-  updateTask() async {
+  updateTask(TaskModel model) async {
     Database? db = await checkDatabase();
     int res = await db!.update("TASK", {
-      "title": "Ir al cine",
-      "description": "Es el viernes en la tarde",
-      "status": "false",
+      "title": model.title,
+      "description": model.description,
+      "status": model.status,
     },
-    where: "id = 2");
-    print(res);
+    where: "ID = ${model.id}");
+    return res;
   }
+  // updateTask() async {
+  //   Database? db = await checkDatabase();
+  //   int res = await db!.update("TASK", {
+  //     "title": "Ir al cine",
+  //     "description": "Es el viernes en la tarde",
+  //     "status": "false",
+  //   },
+  //   where: "ID = 2");
+  //   print(res);
+  // }
 
   deleteRawTask() async {
     Database? db = await checkDatabase();

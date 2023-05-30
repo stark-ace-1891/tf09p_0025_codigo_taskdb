@@ -13,11 +13,11 @@ class _HomePageState extends State<HomePage> {
     return "Juan Manuel";
   }
 
-  showDialogForm() {
+  showDialogForm(TaskModel? modelo) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return MyFormWidget();
+        return MyFormWidget(modelo: modelo,);
       },
     ).then((value) {
       print("El formulario fue cerrado.");
@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          showDialogForm();
+          showDialogForm(null);
         },
         child: Icon(
           Icons.add,
@@ -92,14 +92,14 @@ class _HomePageState extends State<HomePage> {
                   // secondaryBackground: Text("Hola"),
                   child: ListTile(
                     title: Text(
-                      myTasks[index].title,
+                      myTasks[index].title!,
                     ),
                     subtitle: Text(
-                      myTasks[index].description,
+                      myTasks[index].description!,
                     ),
                     trailing: IconButton(
                       onPressed: () {
-                        showDialogForm();
+                        showDialogForm(myTasks[index]!);
                       },
                       icon: Icon(Icons.edit),
                     ),

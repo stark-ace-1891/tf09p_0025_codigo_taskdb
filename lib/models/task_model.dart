@@ -1,14 +1,14 @@
 class TaskModel {
   int? id;
-  String title;
-  String description;
-  String status;
+  String? title;
+  String? description;
+  String? status;
 
   TaskModel({
     this.id,
-    required this.title,
-    required this.description,
-    required this.status,
+    this.title,
+    this.description,
+    this.status,
   });
 
   factory TaskModel.deMapAModel(Map<String, dynamic> mapa) => TaskModel(
